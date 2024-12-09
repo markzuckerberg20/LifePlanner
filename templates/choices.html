@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entscheidungsbaum</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .option-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .option-btn:hover {
+            background-color: #0056b3;
+        }
+        .result-btn {
+            background-color: #ff4c4c;
+            color: white;
+            padding: 12px 24px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .result-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Wählen Sie ein Thema</h1>
+    <p>Bitte wählen Sie, womit Sie beginnen möchten:</p>
+    <a href="/living" class="option-btn">Living</a>
+    <a href="/children" class="option-btn">Children</a>
+    <a href="/luxury" class="option-btn">Luxus</a>
+    <a href="/pension" class="option-btn">Pension</a>
+
+    <!-- Roter Button für die Resultate-Seite -->
+    <a href="/results" class="result-btn">Zu den Ergebnissen</a>
+</body>
+</html>

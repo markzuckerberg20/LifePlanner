@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        h1 {
+            color: #CB444A;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
+        }
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .btn-submit {
+            background-color: #CB444A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            background-color: #dc5b61;
+        }
+    </style>
+</head>
+<body>
+    <h1>Family</h1>
+    <form action="/children" method="post">
+        <label>Do you want children?</label>
+        <select name="wants_children" required>
+            <option value="">Choose</option>
+            <option value="yes" {{ 'selected' if wants_children == True }}>Yes</option>
+            <option value="no" {{ 'selected' if wants_children == False }}>No</option>
+        </select>
+
+        <label>Do you already have children?</label>
+        <select name="already_have_children" required>
+            <option value="">Choose</option>
+            <option value="yes" {{ 'selected' if already_have_children == True }}>Yes</option>
+            <option value="no" {{ 'selected' if already_have_children == False }}>No</option>
+        </select>
+
+        <label for="num_children">How many children do you want?</label>
+        <input type="number" id="num_children" name="num_children" min="0" placeholder="Anzahl der Kinder"
+               value="{{ num_children if num_children else '' }}">
+
+        <label for="age_first_child">At what age do you want your first child?</label>
+        <input type="number" id="age_first_child" name="age_first_child" min="18" placeholder="Alter beim ersten Kind"
+               value="{{ age_first_child if age_first_child else '' }}">
+
+        <label for="child_age">How old is your kid?</label>
+        <input type="number" id="child_age" name="child_age" min="0" placeholder="Age of your child"
+               value="{{ child_age if child_age else '' }}">
+
+        <button type="submit" class="btn-submit">Next</button>
+    </form>
+</body>
+</html>

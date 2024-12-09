@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .custom-success {
+            background-color: #CB444A !important; /* Matching the color used in the heading */
+        }
+        h1 {
+            color: #CB444A;
+        }
+        .btn.active {
+            background-color: #CB444A;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column">
+    <div class="container d-flex justify-content-center align-items-center" style="flex: 1;">
+        <div class="w-100" style="max-width: 600px;">
+            <h1 class="text-success text-center mb-4">Living</h1>
+            <form action="/living" method="post" class="bg-white p-4 rounded shadow-sm">
+                <fieldset>
+                    <legend class="mb-3">Let's assess your living situation</legend>
+
+                    <div class="form-group">
+                        <label>Community</label>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-danger" id="urban" onclick="selectEnvironment('urban')">
+                                <i class="fas fa-city fa-2x"></i><br>Urban
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="mid-urban" onclick="selectEnvironment('sub-urban')">
+                                <i class="fas fa-tree fa-2x"></i><br>Sub-Urban
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="suburban" onclick="selectEnvironment('rural')">
+                                <i class="fas fa-home fa-2x"></i><br>Rural
+                            </button>
+                        </div>
+                        <input type="hidden" id="environment" name="environment" value="{{ session.get('environment', '') }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="living_choice">Buy or rent?</label>
+                        <select id="living_choice" name="living_choice" class="form-control" required>
+                            <option value="">Choose</option>
+                            <option value="buy" {% if session.get('living_choice') == 'buy' %}selected{% endif %}>Buy</option>
+                            <option value="rent" {% if session.get('living_choice') == 'rent' %}selected{% endif %}>Rent</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_to_buy">At what age would you like to buy a property?</label>
+                        <input type="number" id="age_to_buy" name="age_to_buy" min="18" placeholder="Alter beim Kauf" class="form-control"
+                               value="{{ session.get('age_to_buy', '') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Typ des Hauses</label>
+                        <div class="d-flex justify-content-around align-items-center flex-wrap gap-2">
+                            <button type="button" class="btn btn-outline-danger" id="apartment" onclick="selectHouseType('apartment')">
+                                <i class="fas fa-building fa-2x"></i><br>Apartement
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="house" onclick="selectHouseType('house')">
+                                <i class="fas fa-home fa-2x"></i><br>House
+                            </button>
+                        </div>
+                        <input type="hidden" id="type" name="type" value="{{ session.get('type', '') }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="space">How many square meters would you want?</label>
+                        <input type="number" id="space" name="space" min="1" placeholder="Quadratmeter" class="form-control"
+                               value="{{ session.get('space', '') }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dimension of the house</label>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-danger" id="normal" onclick="selectHouseDimension('normal')">
+                                <img src="{{ url_for('static', filename='img/normal.jpeg') }}" alt="Living Icon" class="mt-3" style="width: 80px; height: 80px;">
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="medium" onclick="selectHouseDimension('medium')">
+                                <img src="{{ url_for('static', filename='img/mid.jpeg') }}" alt="Living Icon" class="mt-3" style="width: 80px; height: 80px;">
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" id="luxury" onclick="selectHouseDimension('luxury')">
+                                <img src="{{ url_for('static', filename='img/lux.jpeg') }}" alt="Living Icon" class="mt-3" style="width: 80px; height: 80px;">
+                            </button>
+                        </div>
+                        <input type="hidden" id="dimension" name="dimension" value="{{ session.get('dimension', '') }}" required>
+                    </div>
+                    
+                </fieldset>
+
+                <button type="submit" class="btn btn-danger btn-block">Next</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectEnvironment(value) {
+            document.getElementById('environment').value = value;
+            document.querySelectorAll('.btn-outline-danger').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(value).classList.add('active');
+        }
+        function selectHouseType(value) {
+            document.getElementById('type').value = value;
+            document.querySelectorAll('.form-group:nth-child(4) .btn-outline-danger').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(value).classList.add('active');
+        }
+
+        function selectHouseDimension(value) {
+            document.getElementById('dimension').value = value;
+            document.querySelectorAll('.form-group:nth-child(6) .btn-outline-danger').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(value).classList.add('active');
+        }
+    </script>
+</body>
+</html>

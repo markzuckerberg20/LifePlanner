@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            flex-direction: column;
+        }
+        h1 {
+            color: #CB444A;
+        }
+        .luxury-box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .btn-submit {
+            background-color: #CB444A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            align-self: center;
+            margin-bottom: 40px;
+        }
+        .btn-submit:hover {
+            background-color: #dc5b61;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .col {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+            max-width: 400px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Luxury</h1>
+    <h2>Is there something that you want to have in your life in the future?</h2>
+    <form action="/luxury" method="post">
+        <div class="row">
+            <div class="col luxury-box form-group">
+                <h3>Car</h3>
+                <label for="age_car">Age?</label>
+                <input type="number" id="age_car" name="age_car" min="18" placeholder="Age at purchase" class="form-control mb-3" value="{{ session.get('age_car') }}">
+                <label for="car_attributes">Car Types:</label>
+                <select id="car_attributes" name="car_attributes" class="form-control">
+                    <option value="">Choose an option</option>
+                    <option value="Mid" {{ 'selected' if session.get('car_attributes') == 'Mid' }}>Medium Car (e.g. Honda Civic)</option>
+                    <option value="Mid_Luxury" {{ 'selected' if session.get('car_attributes') == 'Mid_Luxury' }}>Entry-Level Luxury Car (e.g. Audi A5)</option>
+                    <option value="Luxury" {{ 'selected' if session.get('car_attributes') == 'Luxury' }}>Luxury Car (e.g. Mercedes-Benz S-Klasse)</option>
+                    <option value="Sport" {{ 'selected' if session.get('car_attributes') == 'Sport' }}>Sports Car (e.g. Porsche 911)</option>
+                </select>
+            </div>
+
+            <div class="col luxury-box form-group">
+                <h3>Travel</h3>
+                <label for="age_travel">Age?</label>
+                <input type="number" id="age_travel" name="age_travel" min="18" placeholder="Age for your dream vacation" class="form-control mb-3" value="{{ session.get('age_travel') }}">
+                <label for="travel_attributes">Kind of vacation:</label>
+                <select id="travel_attributes" name="travel_attributes" class="form-control">
+                    <option value="">Choose an option</option>
+                    <option value="Low_budgetE" {{ 'selected' if session.get('travel_attributes') == 'Low_budgetE' }}>Low-budget in Europe</option>
+                    <option value="All_inclusiveO" {{ 'selected' if session.get('travel_attributes') == 'All_inclusiveO' }}>All-inclusive outside Europe</option>
+                    <option value="Low_budgetO" {{ 'selected' if session.get('travel_attributes') == 'Low_budgetO' }}>Low-budget outside Europe</option>
+                    <option value="All_inclusiveE" {{ 'selected' if session.get('travel_attributes') == 'All_inclusiveE' }}>All-inclusive in Europe</option>
+                </select>
+            </div>
+
+            <div class="col luxury-box form-group">
+                <h3>Watch</h3>
+                <label for="age_watch">Age?</label>
+                <input type="number" id="age_watch" name="age_watch" min="18" placeholder="Age of purchase" class="form-control mb-3" value="{{ session.get('age_watch') }}">
+                <label for="watch_attributes">Watch Type:</label>
+                <select id="watch_attributes" name="watch_attributes" class="form-control">
+                    <option value="">Choose an option</option>
+                    <option value="Mid" {{ 'selected' if session.get('watch_attributes') == 'Mid' }}>Entry-Level Luxury Watch (e.g. Tudor)</option>
+                    <option value="High" {{ 'selected' if session.get('watch_attributes') == 'High' }}>Luxury Watch (e.g. IWC)</option>
+                    <option value="Luxury" {{ 'selected' if session.get('watch_attributes') == 'Luxury' }}>High-End Luxury Watch (e.g. Rolex)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col luxury-box form-group">
+                <h3>Wedding</h3>
+                <label for="age_wedding">Age?</label>
+                <input type="number" id="age_wedding" name="age_wedding" min="18" placeholder="Age of dream wedding" class="form-control mb-3" value="{{ session.get('age_wedding') }}">
+                <label for="wedding_attributes">Wedding Attributes:</label>
+                <select id="wedding_attributes" name="wedding_attributes" class="form-control">
+                    <option value="">Choose an option</option>
+                    <option value="Normal" {{ 'selected' if session.get('wedding_attributes') == 'Normal' }}>A normal wedding (approx. 15k)</option>
+                    <option value="Mid" {{ 'selected' if session.get('wedding_attributes') == 'Mid' }}>An expensive wedding (approx. 40k)</option>
+                    <option value="Expensive" {{ 'selected' if session.get('wedding_attributes') == 'Expensive' }}>A extravagant wedding (approx. 70k)</option>
+                </select>
+            </div>
+
+            <div class="col luxury-box form-group">
+                <h3>Other</h3>
+                <label for="age_other">Is there anything else, that is not listed?</label>
+                <input type="number" id="age_other" name="age_other" min="18" placeholder="Age of purchase" class="form-control mb-3" value="{{ session.get('age_other') }}">
+                <label for="other_attributes">Amount:</label>
+                <input type="number" id="other_amount" name="other_amount" min="0" placeholder="Amount in CHF" class="form-control mb-3" value="{{ session.get('other_amount') }}">
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Weiter</button>
+    </form>
+</body>
+</html>
